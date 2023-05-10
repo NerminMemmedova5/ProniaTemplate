@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "ProniaTemplate/1.0.0": {
+        "runtime": {
+          "ProniaTemplate.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ProniaTemplate/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
