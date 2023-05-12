@@ -1,117 +1,62 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ProniaTemplate.DAL;
 using ProniaTemplate.Models;
 using ProniaTemplate.ViewModels;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ProniaTemplate.Controllers
 {
     public class HomeController : Controller
     {
-        List<Home> Homes;
-        List<Products> Products;
-        public HomeController()
-        {
-            Homes = new List<Home>
-            {
-                new Home
-                {
-                    Id=1,
-                    Name="Jale",
-                    Surname="Eliyeva",
-                    Position="HR",
-                    Description="Lorem ipsum dolor sit amet,  ut labore et dolore. magna",
-                    Image="1--1rnu4p.png"
+        private readonly ProniaDbContext _context; 
 
-                },
-                 new Home
-                {
-                    Id=2,
-                    Name="Zaur",
-                    Surname="Eliyev",
-                    Position="Software Developer",
-                    Description="Lorem ipsum dolor sit amet",
-                     Image="2.png"
-                },
-                  new Home
-                {
-                    Id=3,
-                    Name="Nermin",
-                    Surname="Memmedova",
-                    Position="Master Student",
-                    Description="Lorem ipsum dolor sit amet,  ut labore et dolore. magna",
-                     Image="3.png"
-                },
-                   new Home
-                {
-                    Id=4,
-                    Name="Ulker",
-                    Surname="Agayeva",
-                    Position="Doctor",
-                    Description="Lorem ipsum dolor sit amet,  ut labore et dolore. magna",
-                     Image="1--1rnu4p.png"
-                },
-            };
+        public HomeController(ProniaDbContext context)
+        {
+            _context = context;
         }
        
         public IActionResult Index()
         {
-            Products = new List<Products>
-            {
-                new Products
-                {
-                    Id=1,
-                    Name="Kaktus",
-                    Price=35.2m
-                },
-                new Products
-                {
-                    Id=2,
-                    Name="Lily",
-                    Price=10.2m
-                },
-                new Products
-                {
-                    Id=3,
-                    Name="Orchid",
-                    Price=95.1m
-                },
-                new Products
-                {
-                    Id=4,
-                    Name="Bouquet",
-                    Price=18.1m
-                },
-                new Products
-                {
-                    Id=5,
-                    Name="Daisy",
-                    Price=46m
-                },
-                new Products
-                {
-                    Id=6,
-                    Name="Gardenia",
-                    Price=82.7m
-                },
-                 new Products
-                {
-                    Id=7,
-                    Name="Poppy",
-                    Price=59m
-                },
-                  new Products
-                {
-                    Id=8,
-                    Name="Aster",
-                    Price=32.7m
-                },
-            };
+           
+            
+             List<Slide> Slides = _context.Slides.ToList();
+
+            //_context.Products.AddRange(Products);
+            //_context.SaveChanges();
+
+            List<Products> Products = _context.Products.Include(p => p.Category).ToList();
+
+            //_context.Positions.AddRange(Positions);
+            //_context.SaveChanges();
+
+            List<Position> Positions = _context.Positions.ToList();
+
+            //_context.Persons.AddRange(Persons);
+            //_context.SaveChanges();
+
+            List<Person> Persons=_context.Persons.Include(p=>p.Position).ToList();
 
             HomeViewModel viewModel = new HomeViewModel
             {
-                Homes = Homes,
-                Products=Products
+                Persons = Persons,
+                Positions=Positions,
+                Products=Products,
+                Slides=Slides
+                
             };
             return View(viewModel);
+        }
+
+        public IActionResult Details(int? id)
+        {
+            if (id == null || id < 1) return BadRequest();
+
+            Products products = _context.Products.Include(p=>p.Category).FirstOrDefault(p => p.Id == id);
+            if (products == null) return NotFound();
+
+
+            return View(products);
         }
     }
 }

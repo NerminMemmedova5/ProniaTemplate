@@ -268,6 +268,7 @@
                                         </div>
                                         <div class="product-content">
                                             <a class="product-name" href="shop.html">@item.Name</a>
+                                            <p>@item.Category.Name</p>
                                             <div class="price-box pb-1">
                                                 <span class="new-price">$@item.Price</span>
                                             </div>
@@ -1849,25 +1850,25 @@
           <div class="container custom-space">
             <div class="swiper-container testimonial-slider with-bg">
               <div class="swiper-wrapper">
-               @foreach (Home home in Model.Homes)
+               @foreach (Person person in Model.Persons)
                     {
                          <div class="swiper-slide testimonial-item">
                   <div class="user-info mb-3">
                     <div class="user-shape-wrap">
                       <div class="user-img">
                         <img
-                          src="~/assets/images/website-images//@home.Image"
+                          src="~/assets/images/website-images//@person.Image"
                           alt="User Image"
                         />
                       </div>
                     </div>
                     <div class="user-content text-charcoal">
-                      <h4 class="user-name mb-1">@home.Name @home.Surname </h4>
-                      <span class="user-occupation">@home.Position</span>
+                      <h4 class="user-name mb-1">@person.Name @person.Surname </h4>
+                                    <span class="user-occupation">@person.Position.Name</span>
                     </div>
                   </div>
                   <p class="user-comment mb-6">
-                   @home.Description
+                                @person.Position.Description
                   </p>
                 </div>
                     }
