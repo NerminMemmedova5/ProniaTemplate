@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ProniaTemplate.DAL;
 using ProniaTemplate.Models;
 using ProniaTemplate.ViewModels;
+using System.Collections.Generic;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ProniaTemplate.Controllers
@@ -40,23 +41,38 @@ namespace ProniaTemplate.Controllers
             HomeViewModel viewModel = new HomeViewModel
             {
                 Persons = Persons,
-                Positions=Positions,
-                Products=Products,
-                Slides=Slides
-                
+                Positions = Positions,
+                Products = Products,
+                Slides = Slides,
+                            
+
             };
             return View(viewModel);
         }
 
         public IActionResult Details(int? id)
         {
+            List<Products> RelatedProducts = _context.Products.ToList();
             if (id == null || id < 1) return BadRequest();
 
-            Products products = _context.Products.Include(p=>p.Category).FirstOrDefault(p => p.Id == id);
+            Products products = _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.ProductImages)
+                .Include(p => p.ProductTags)
+                .ThenInclude(p => p.Tag)
+                .Include(p => p.ProductColors)
+                .ThenInclude(p => p.Color)
+                .Include(p => p.ProductSizes)
+                .ThenInclude(p => p.Size)
+                .FirstOrDefault(p => p.Id == id);
+
+
             if (products == null) return NotFound();
 
 
-            return View(products);
+            return View(RelatedProducts);
         }
+
+        
     }
 }

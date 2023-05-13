@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProniaTemplate.DAL;
 
@@ -11,9 +12,11 @@ using ProniaTemplate.DAL;
 namespace ProniaTemplate.Migrations
 {
     [DbContext(typeof(ProniaDbContext))]
-    partial class ProniaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230513132248_CreateSizesTablesAndProductSizesTable")]
+    partial class CreateSizesTablesAndProductSizesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,29 +57,6 @@ namespace ProniaTemplate.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Colors");
-                });
-
-            modelBuilder.Entity("ProniaTemplate.Models.ColorSize", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ColorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SizeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("SizeId");
-
-                    b.ToTable("ColorSizes");
                 });
 
             modelBuilder.Entity("ProniaTemplate.Models.Person", b =>
@@ -321,25 +301,6 @@ namespace ProniaTemplate.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
-                });
-
-            modelBuilder.Entity("ProniaTemplate.Models.ColorSize", b =>
-                {
-                    b.HasOne("ProniaTemplate.Models.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProniaTemplate.Models.Size", "Size")
-                        .WithMany()
-                        .HasForeignKey("SizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("ProniaTemplate.Models.Person", b =>

@@ -14,6 +14,18 @@ namespace ProniaTemplate.DAL
         public DbSet<Products> Products { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<ProductTag> ProductTags { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<ProductColor> ProductColors { get; set; }
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
+        
+
+
+
+
 
     }
 }

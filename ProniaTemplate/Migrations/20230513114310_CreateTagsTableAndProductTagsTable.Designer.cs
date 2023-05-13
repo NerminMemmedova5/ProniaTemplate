@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProniaTemplate.DAL;
 
@@ -11,9 +12,11 @@ using ProniaTemplate.DAL;
 namespace ProniaTemplate.Migrations
 {
     [DbContext(typeof(ProniaDbContext))]
-    partial class ProniaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230513114310_CreateTagsTableAndProductTagsTable")]
+    partial class CreateTagsTableAndProductTagsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,46 +40,6 @@ namespace ProniaTemplate.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("ProniaTemplate.Models.Color", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Colors");
-                });
-
-            modelBuilder.Entity("ProniaTemplate.Models.ColorSize", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ColorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SizeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("SizeId");
-
-                    b.ToTable("ColorSizes");
                 });
 
             modelBuilder.Entity("ProniaTemplate.Models.Person", b =>
@@ -130,29 +93,6 @@ namespace ProniaTemplate.Migrations
                     b.ToTable("Positions");
                 });
 
-            modelBuilder.Entity("ProniaTemplate.Models.ProductColor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ColorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductColors");
-                });
-
             modelBuilder.Entity("ProniaTemplate.Models.ProductImage", b =>
                 {
                     b.Property<int>("Id")
@@ -176,29 +116,6 @@ namespace ProniaTemplate.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
-                });
-
-            modelBuilder.Entity("ProniaTemplate.Models.ProductSize", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SizeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("SizeId");
-
-                    b.ToTable("ProductSizes");
                 });
 
             modelBuilder.Entity("ProniaTemplate.Models.ProductTag", b =>
@@ -257,23 +174,6 @@ namespace ProniaTemplate.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("ProniaTemplate.Models.Size", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Sizes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Sizes");
-                });
-
             modelBuilder.Entity("ProniaTemplate.Models.Slide", b =>
                 {
                     b.Property<int>("Id")
@@ -323,25 +223,6 @@ namespace ProniaTemplate.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("ProniaTemplate.Models.ColorSize", b =>
-                {
-                    b.HasOne("ProniaTemplate.Models.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProniaTemplate.Models.Size", "Size")
-                        .WithMany()
-                        .HasForeignKey("SizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Size");
-                });
-
             modelBuilder.Entity("ProniaTemplate.Models.Person", b =>
                 {
                     b.HasOne("ProniaTemplate.Models.Position", "Position")
@@ -353,25 +234,6 @@ namespace ProniaTemplate.Migrations
                     b.Navigation("Position");
                 });
 
-            modelBuilder.Entity("ProniaTemplate.Models.ProductColor", b =>
-                {
-                    b.HasOne("ProniaTemplate.Models.Color", "Color")
-                        .WithMany("ProductColors")
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProniaTemplate.Models.Products", "Product")
-                        .WithMany("ProductColors")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("ProniaTemplate.Models.ProductImage", b =>
                 {
                     b.HasOne("ProniaTemplate.Models.Products", "Product")
@@ -381,25 +243,6 @@ namespace ProniaTemplate.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("ProniaTemplate.Models.ProductSize", b =>
-                {
-                    b.HasOne("ProniaTemplate.Models.Products", "Product")
-                        .WithMany("ProductSizes")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProniaTemplate.Models.Size", "Size")
-                        .WithMany()
-                        .HasForeignKey("SizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("ProniaTemplate.Models.ProductTag", b =>
@@ -437,11 +280,6 @@ namespace ProniaTemplate.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("ProniaTemplate.Models.Color", b =>
-                {
-                    b.Navigation("ProductColors");
-                });
-
             modelBuilder.Entity("ProniaTemplate.Models.Position", b =>
                 {
                     b.Navigation("Persons");
@@ -449,11 +287,7 @@ namespace ProniaTemplate.Migrations
 
             modelBuilder.Entity("ProniaTemplate.Models.Products", b =>
                 {
-                    b.Navigation("ProductColors");
-
                     b.Navigation("ProductImages");
-
-                    b.Navigation("ProductSizes");
 
                     b.Navigation("ProductTags");
                 });
