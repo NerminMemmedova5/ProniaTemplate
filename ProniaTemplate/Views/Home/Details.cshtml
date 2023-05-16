@@ -1,5 +1,5 @@
 ﻿
-@model Products
+@model Product
 
 <!-- Begin Main Content Area  -->
 <main class="main-content">
@@ -136,7 +136,7 @@
                                 <option value="medium">Medium Size & Poot</option>
                                 @foreach (var item in Model.ProductSizes)
                                 {
-                                    <option value="large">@item.Size.Sizes @*Sizes Size Name dir*@</option>
+                                    <option value="large">@item.Size.Name </option>
                                 
                                 }
                             </select>

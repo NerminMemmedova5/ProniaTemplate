@@ -11,7 +11,7 @@ namespace ProniaTemplate.DAL
         }
         public DbSet<Slide> Slides { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Products> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }

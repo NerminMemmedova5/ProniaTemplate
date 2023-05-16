@@ -26,7 +26,7 @@ namespace ProniaTemplate.Controllers
             //_context.Products.AddRange(Products);
             //_context.SaveChanges();
 
-            List<Products> Products = _context.Products.Include(p => p.Category).ToList();
+            List<Product> Products = _context.Products.Include(p => p.Category).ToList();
 
             //_context.Positions.AddRange(Positions);
             //_context.SaveChanges();
@@ -52,10 +52,9 @@ namespace ProniaTemplate.Controllers
 
         public IActionResult Details(int? id)
         {
-            List<Products> RelatedProducts = _context.Products.ToList();
             if (id == null || id < 1) return BadRequest();
 
-            Products products = _context.Products
+            Product products = _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.ProductImages)
                 .Include(p => p.ProductTags)
@@ -70,7 +69,7 @@ namespace ProniaTemplate.Controllers
             if (products == null) return NotFound();
 
 
-            return View(RelatedProducts);
+            return View(products);
         }
 
         
