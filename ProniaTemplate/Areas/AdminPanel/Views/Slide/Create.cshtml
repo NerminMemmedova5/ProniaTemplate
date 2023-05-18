@@ -1,0 +1,53 @@
+﻿@model Slide
+
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Slider</h4>
+
+                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label asp-for="Title">Title</label>
+                                <input asp-for="Title" type="text" class="form-control" id="exampleInputUsername1" placeholder="Title">
+                                <span asp-validation-for="Title"></span>
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SubTitle">SubTitle</label>
+                                <input asp-for="SubTitle" type="text" class="form-control" id="exampleInputUsername1" placeholder="SubTitle">
+
+                                <span asp-validation-for="SubTitle"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Description">Description</label>
+                                <input asp-for="Description" type="text" class="form-control" id="exampleInputUsername1" placeholder="Description">
+
+                                <span asp-validation-for="Description"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Photo">Photo</label>
+                                <input asp-for="Photo" class="form-control" id="exampleInputUsername1" placeholder="Photo">
+
+                                <span asp-validation-for="Photo"></span>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+
+</div>
+<!-- main-panel ends -->

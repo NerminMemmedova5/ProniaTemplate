@@ -16,4 +16,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\upload\client\" />
+    <Folder Include="wwwroot\upload\slide\" />
+  </ItemGroup>
+
 </Project>

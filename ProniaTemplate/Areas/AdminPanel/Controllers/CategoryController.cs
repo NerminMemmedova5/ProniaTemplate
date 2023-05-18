@@ -52,26 +52,29 @@ namespace ProniaTemplate.Areas.AdminPanel.Controllers
         {
             if (id == null || id < 1) return BadRequest();
 
-            Category ex = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            Category category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
 
-            if (ex == null) return NotFound();
+            if (category == null) return NotFound();
 
             if (!ModelState.IsValid)
             { 
-            return View(ex);
+            return View(category);
             }
 
-           
+            if (category.Name == newcategory.Name)
+            {
+                return RedirectToAction(nameof(Index));
+            }
 
             bool result = await _context.Categories
-                .AnyAsync(c => c.Name.Trim().ToLower() == newcategory.Name.Trim().ToLower() && c.Id!=ex.Id);
+                .AnyAsync(c => c.Name.Trim().ToLower() == newcategory.Name.Trim().ToLower() && c.Id!= category.Id);
             if (result)
             {
                 ModelState.AddModelError("Name", "Bu adli category artiq yaradilib");
-                return View(ex);
+                return View(category);
             }
 
-            ex.Name = newcategory.Name;
+            category.Name = newcategory.Name;
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
