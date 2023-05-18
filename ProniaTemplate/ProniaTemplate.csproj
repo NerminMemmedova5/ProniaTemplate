@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\upload\client\" />
+    <Folder Include="wwwroot\upload\person\" />
     <Folder Include="wwwroot\upload\slide\" />
   </ItemGroup>
 

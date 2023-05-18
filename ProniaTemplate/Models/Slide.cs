@@ -6,8 +6,7 @@ namespace ProniaTemplate.Models
 {
     public class Slide
     {
-        [Required(ErrorMessage = "Title bos ola bilmez")]
-        [MaxLength(45,ErrorMessage ="title 35 den uzun ola bilmez")]
+        
         public int Id { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }

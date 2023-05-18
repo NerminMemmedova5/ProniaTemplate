@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fGwcBqS8ws7k0jXVuS1Ic7UTWrvOXmLsklIwkJEIW9A=",
+  "Hash": "5jj/8N3ZCFezrl2TQFRC+lUmY+p9pbIzZt6UYw+EsuY=",
   "Source": "ProniaTemplate",
   "BasePath": "_content/ProniaTemplate",
   "Mode": "Default",
@@ -5098,40 +5098,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\scss\\style.scss"
-    },
-    {
-      "Identity": "C:\\Users\\User\\Desktop\\BackEnd\\ProniaTemplate\\ProniaTemplate\\wwwroot\\upload\\slide\\0f2dd31f-540c-4023-b6d8-cafa26e4771b_sekil.jpg",
-      "SourceId": "ProniaTemplate",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Desktop\\BackEnd\\ProniaTemplate\\ProniaTemplate\\wwwroot\\",
-      "BasePath": "_content/ProniaTemplate",
-      "RelativePath": "upload/slide/0f2dd31f-540c-4023-b6d8-cafa26e4771b_sekil.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\upload\\slide\\0f2dd31f-540c-4023-b6d8-cafa26e4771b_sekil.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\User\\Desktop\\BackEnd\\ProniaTemplate\\ProniaTemplate\\wwwroot\\upload\\slide\\e9ad5561-0d85-4ad4-acd7-310a6842eb98_sekil.jpg",
-      "SourceId": "ProniaTemplate",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User\\Desktop\\BackEnd\\ProniaTemplate\\ProniaTemplate\\wwwroot\\",
-      "BasePath": "_content/ProniaTemplate",
-      "RelativePath": "upload/slide/e9ad5561-0d85-4ad4-acd7-310a6842eb98_sekil.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\upload\\slide\\e9ad5561-0d85-4ad4-acd7-310a6842eb98_sekil.jpg"
     }
   ]
 }
