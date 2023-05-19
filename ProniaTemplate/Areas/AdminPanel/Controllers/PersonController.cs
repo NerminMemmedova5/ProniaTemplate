@@ -3,10 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using ProniaTemplate.DAL;
 using ProniaTemplate.Models;
 using System;
+using System.Text;
 
 namespace ProniaTemplate.Areas.AdminPanel.Controllers
 {
+    
+
     [Area("AdminPanel")]
+
+   
     public class PersonController : Controller
     {
         private readonly ProniaDbContext _context;
@@ -20,12 +25,15 @@ namespace ProniaTemplate.Areas.AdminPanel.Controllers
 
         public IActionResult Index()
         {
-            List<Person> person = _context.Persons.ToList();
+            List<Person> person = _context.Persons
+                .Include(p=>p.Position)
+                .ToList();
             return View(person);
         }
 
-        public IActionResult Create()
+        public async Task< IActionResult> Create()
         {
+            ViewBag.Position = await _context.Positions.ToListAsync();
             return View();
 
         }
@@ -33,7 +41,8 @@ namespace ProniaTemplate.Areas.AdminPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Person person)
         {
-
+            ViewBag.Position = await _context.Positions.ToListAsync();
+            
             if (!ModelState.IsValid) return View();
             if (person == null)
             {
@@ -55,7 +64,7 @@ namespace ProniaTemplate.Areas.AdminPanel.Controllers
             var fileName = Guid.NewGuid().ToString() + "_" + person.Photo.FileName;
             person.Image = fileName;
 
-            string path = Path.Combine(_env.WebRootPath, "upload/person", fileName);
+            string path = Path.Combine(_env.WebRootPath, "upload/book", fileName);
 
             using (FileStream stream = new FileStream(path, FileMode.Create))
             {
@@ -74,6 +83,7 @@ namespace ProniaTemplate.Areas.AdminPanel.Controllers
             Person person = await _context.Persons.FirstOrDefaultAsync(s => s.Id == id);
 
             if (person == null) return NotFound();
+            ViewBag.Position = await _context.Positions.ToListAsync();
 
             return View(person);
 
@@ -82,9 +92,10 @@ namespace ProniaTemplate.Areas.AdminPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(Person person)
         {
+            ViewBag.Position = await _context.Positions.ToListAsync();
             if (!ModelState.IsValid) return View();
 
-            Person exit = await _context.Persons.FirstOrDefaultAsync(s => s.Id == person.Id);
+            Person exit = await _context.Persons.Include(p=>p.Position).FirstOrDefaultAsync(s => s.Id == person.Id);
 
             if (exit == null) return NotFound();
 
@@ -130,7 +141,7 @@ namespace ProniaTemplate.Areas.AdminPanel.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            Person person = await _context.Persons.FirstOrDefaultAsync(person => person.Id == id);
+            Person person = await _context.Persons.Include(p=>p.Position).FirstOrDefaultAsync(person => person.Id == id);
 
             if (person == null) return NotFound();
 
@@ -150,3 +161,6 @@ namespace ProniaTemplate.Areas.AdminPanel.Controllers
         }
     }
 }
+
+
+
