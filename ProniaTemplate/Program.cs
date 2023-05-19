@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using ProniaTemplate.DAL;
+using ProniaTemplate.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<LayoutService>();
 
 builder.Services.AddDbContext<ProniaDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
